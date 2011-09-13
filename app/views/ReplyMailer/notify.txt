@@ -1,0 +1,11 @@
+${comment.username}'s reply to '${comment.topicTitle}'
+    link    - http://news.ycombinator.com/item?id=${comment.id}
+    parent  - http://news.ycombinator.com/item?id=${comment.parentID}
+    topic   - http://news.ycombinator.com/item?id=${comment.topicID}
+---------------------------------------------------------------------
+
+${comment.text}
+ 
+---------------------------------------------------------------------
+HN Notify (c) 2011 The Buzz Media
+Unsubscribe - http://hnnotify.com/unsubscribe?email=${user.email} 

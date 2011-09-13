@@ -1,0 +1,25 @@
+<html>
+	<body style="font-family: Verdana; font-size: 10pt; color: #000000;">
+		<center>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F6F6EF;">
+				<thead style="background-color: #FF6600;">
+					<tr>
+						<td style="padding: 0.5em;">
+							<a href="http://news.ycombinator.com/user?id=${comment.username}" style="color: #000000;">${comment.username}'s</a> reply | <a href="http://news.ycombinator.com/item?id=${comment.id}" style="color: #000000;">link</a> | <a href="http://news.ycombinator.com/item?id=${comment.parentID}" style="color: #000000;">parent</a> | on '<a href="http://news.ycombinator.com/item?id=${comment.topicID}" style="color: #000000;"><em>${comment.topicTitle}</em></a>'
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="padding: 0.5em;">
+							<p style="font-size: 9pt;">${comment.html.raw()}</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="footer" style="color: #888888;	font-size: 8pt;	margin-top: 1em; margin-left: auto;	margin-right: auto;">
+				<a href="http://hnnotify.com" style="color: #000000;">HN Notify</a> &copy; 2011 The Buzz Media | Click to <a href="http://hnnotify.com/unsubscribe?email=${user.email}" style="color: #000000;">Unsubscribe</a> 
+			</div>
+		</center>
+	</body>
+</html>

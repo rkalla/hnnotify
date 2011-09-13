@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>HN Notify | #{get 'title' /}</title>
+        <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="@{'/public/css/main.css'}">
+        <link rel="shortcut icon" type="image/png" href="@{'/public/img/favicon.png'}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js" type="text/javascript"></script>
+        #{get 'extScripts' /}
+    </head>
+    <body>
+    	<div id="root">
+    		<table width="100%" border="0" cellspacing="0" cellpadding="8">
+    			<thead id="pageHeader">
+    				<tr>
+    					<td width="18px">
+    						<img src="http://ycombinator.com/images/y18.gif" width="18" height="18" style="border:1px #ffffff solid;">
+    					</td>
+    					<td class="title">#{a @Application.index()}HN Notify#{/a}</td>
+    					<td class="subtitle">Email Reply Notifications for HN</td>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				<tr>
+    					<td colspan="3">
+    						#{doLayout /}
+    					</td>
+    				</tr>
+    			</tbody>
+    			<tfoot>
+    				<tr>
+    					<td colspan="3">
+    						<span>#{a @Application.privacy()}Privacy#{/a}</span>
+    						|
+    						<span>#{a @Application.how()}How it Works#{/a}</span>
+    						|
+    						<span>&copy; 2011 <a href="http://www.thebuzzmedia.com/software/" title="The Buzz Media - Software">The Buzz Media</a></span>
+    					</td>
+    				</tr>
+    			</tfoot>
+    		</table>
+    	</div>
+    </body>
+</html>

@@ -1,0 +1,91 @@
+body {
+    font-size: 10pt;
+    font-family: Verdana;
+}
+
+#root {
+	width: 640px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#pageHeader {
+	background-color: #FF6600;
+}
+
+#pageHeader a {
+	color: #000000;
+	text-decoration: none;
+}
+
+.title {
+	font-weight: bolder;
+}
+
+.subtitle {
+	text-align: right;
+	font-size: 11pt;
+	color: #FFFFFF;
+}
+
+tbody {
+	background-color: #F6F6EF;
+}
+
+tfoot {
+	font-size: x-small;
+}
+
+tfoot td {
+	text-align: center;
+}
+
+#body {
+	padding: 0 1em;
+}
+
+#prompt {
+	font-size: 13pt;
+	text-align: center;
+}
+
+#signupTable {
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 1em;
+}
+
+#signupTable thead ul {	
+	border: 1px solid red;
+	border-radius: 8px;
+	background-color: #FFEBEB;
+	
+	margin: 0.25em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	list-style: none;
+}
+
+input {
+	font-size: 16pt;
+	padding: 0.25em;
+	margin-bottom: 0.5em;
+}
+
+.unfocused {
+	color: #CCCCCC;
+}
+
+.focused {
+	color: #565656;
+}
+
+.note {
+	padding: 1em;
+	border: 1px solid #999999;
+	border-radius: 8px;
+	background-color: #FFFFE1;
+}
+
+footer {
+}

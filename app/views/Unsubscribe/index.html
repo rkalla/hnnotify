@@ -1,0 +1,36 @@
+#{extends 'main.html' /}
+#{set title:'Unsubscribe' /}
+#{set 'extScripts'}
+	<script src="@{'/public/js/signup.js'}" type="text/javascript"></script>
+#{/set}
+
+<div id="body">
+	<p id="prompt">
+		Unsubscribe from HN Notify
+	</p>
+	#{form @Unsubscribe.unsubscribe(), method:'POST', id:'signupForm'}
+		<table id="signupTable" border="0" cellspacing="0" cellpadding="0">
+			#{ifErrors}
+			<thead>
+				<tr>
+					<td>
+						<ul>
+							#{errors}
+						       <li>${error}</li>
+						   #{/errors}
+						</ul>
+					</td>
+				</tr>
+			</thead>
+			#{/ifErrors}
+			<tbody>
+				<tr>
+					<td>
+						<input id="email" name="email" type="text" size="24" value="${email}" />
+						<input type="submit" value="Unsubscribe" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	#{/form}
+</div>
