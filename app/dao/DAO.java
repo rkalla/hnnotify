@@ -129,6 +129,11 @@ public class DAO {
 		save(AUTHOR_COL_NAME, author);
 	}
 
+	public static long getCommentCount() {
+		DBCollection col = db.getCollection(COMMENT_COL_NAME);
+		return col.count();
+	}
+
 	public static long getDeliveredCommentCount() {
 		DBCollection col = db.getCollection(COMMENT_COL_NAME);
 		return col.count(new BasicDBObject().append("state",

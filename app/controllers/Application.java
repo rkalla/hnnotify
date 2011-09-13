@@ -1,10 +1,10 @@
 package controllers;
 
-import static common.Constants.FORM_DEFAULT_EMAIL;
-import static common.Constants.FORM_DEFAULT_USERNAME;
+import static common.Constants.*;
 import models.Author;
 import models.User;
 import parser.HNParser;
+import play.cache.Cache;
 import play.mvc.Controller;
 import dao.DAO;
 
@@ -12,6 +12,17 @@ public class Application extends Controller {
 	public static void index() {
 		renderArgs.put("email", FORM_DEFAULT_EMAIL);
 		renderArgs.put("username", FORM_DEFAULT_USERNAME);
+
+//		if (Cache.get(COMMENT_COUNT_CACHE_KEY) == null)
+//			Cache.set(COMMENT_COUNT_CACHE_KEY, new Long(DAO.getCommentCount()),
+//					"30s");
+
+		if (Cache.get(DELIVERED_COUNT_CACHE_KEY) == null)
+			Cache.set(DELIVERED_COUNT_CACHE_KEY,
+					new Long(DAO.getDeliveredCommentCount()), "30s");
+
+		// if (Cache.get(USER_COUNT_CACHE_KEY) == null)
+		// Cache.set(USER_COUNT_CACHE_KEY, new Long(DAO.getUserCount()), "10s");
 
 		render();
 	}

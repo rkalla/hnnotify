@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>HN Notify | #{get 'title' /}</title>
-        <meta charset="${_response_encoding}">
+        <meta charset="UTF-8">
         <link rel="stylesheet" media="screen" href="@{'/public/css/main.css'}">
         <link rel="shortcut icon" type="image/png" href="@{'/public/img/favicon.png'}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js" type="text/javascript"></script>
@@ -30,12 +30,15 @@
     			</tbody>
     			<tfoot>
     				<tr>
-    					<td colspan="3">
+    					<td align="left" colspan="2">
     						<span>#{a @Application.privacy()}Privacy#{/a}</span>
     						|
     						<span>#{a @Application.how()}How it Works#{/a}</span>
     						|
     						<span>&copy; 2011 <a href="http://www.thebuzzmedia.com/software/" title="The Buzz Media - Software">The Buzz Media</a></span>
+    					</td>
+    					<td style="text-align: right;">
+    						${play.cache.Cache.get(common.Constants.DELIVERED_COUNT_CACHE_KEY)} notifications delivered
     					</td>
     				</tr>
     			</tfoot>

@@ -4,18 +4,22 @@ public class Constants {
 	public static final int CONNECTION_TIMEOUT = 30000;
 	public static final int RETRY_DELAY = 1500;
 	public static final int MAX_RETRIES = 5;
-	
+
 	public static final int MAX_ADOPTION_ATTEMPTS = 7;
 	public static final int MAX_DELIVERY_ATTEMPTS = 7;
 
+	public static final String DELIVERED_COUNT_CACHE_KEY = "deliveredCountCacheKey";
+	public static final String COMMENT_COUNT_CACHE_KEY = "commentCountCacheKey";
+	public static final String USER_COUNT_CACHE_KEY = "userCountCacheKey";
+
 	public static final String BASE_URL = "http://news.ycombinator.com/";
-	
+
 	public static final String ITEM_URL = BASE_URL + "item?id=";
 	public static final String USER_URL = BASE_URL + "user?id=";
 	public static final String NEW_COMMENTS_URL = BASE_URL + "newcomments";
-	
+
 	public static final String EMAIL_PREFIX = "[HN Notify]";
-	
+
 	public static final String FORM_DEFAULT_EMAIL = "your@email.com";
 	public static final String FORM_DEFAULT_USERNAME = "HN Username";
 
