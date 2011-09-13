@@ -1,6 +1,8 @@
-package dao;
+package cli;
 
 import java.util.List;
+
+import dao.DAO;
 
 import models.Author;
 

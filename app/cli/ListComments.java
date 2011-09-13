@@ -1,20 +1,18 @@
-package dao;
+package cli;
 
 import java.util.List;
 
-import models.Comment;
-import models.Comment.State;
+import dao.DAO;
 
-public class ResetComments {
+import models.Comment;
+
+public class ListComments {
 	public static void main(String[] args) {
 		List<Comment> list = DAO.findAllComments();
 		
 		System.out.printf("Found %d comments...\n", list.size());
 		
-		for(Comment c : list) {
-			c.state = State.NEW;
-			c.parentUsername = null;
-			DAO.updateComment(c);
-		}
+		for(Comment c : list)
+			System.out.println(c);
 	}
 }

@@ -1,16 +1,21 @@
-package dao;
+package cli;
 
 import java.util.List;
 
-import models.Comment;
+import dao.DAO;
 
-public class ListComments {
+import models.Comment;
+import models.Comment.State;
+
+public class SetDeliveredStateComments {
 	public static void main(String[] args) {
 		List<Comment> list = DAO.findAllComments();
 		
 		System.out.printf("Found %d comments...\n", list.size());
 		
-		for(Comment c : list)
-			System.out.println(c);
+		for(Comment c : list) {
+			c.state = State.DELIVERED;
+			DAO.updateComment(c);
+		}
 	}
 }
