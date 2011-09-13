@@ -12,6 +12,7 @@ public class Unsubscribe extends Controller {
 		render();
 	}
 
+	@SuppressWarnings("static-access")
 	public static void unsubscribe(String email) {
 		if (email == null || email.isEmpty()
 				|| FORM_DEFAULT_EMAIL.equals(email)

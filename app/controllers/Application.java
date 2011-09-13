@@ -4,11 +4,9 @@ import static common.Constants.FORM_DEFAULT_EMAIL;
 import static common.Constants.FORM_DEFAULT_USERNAME;
 import models.Author;
 import models.User;
-import dao.DAO;
 import parser.HNParser;
-import play.data.validation.Email;
-import play.data.validation.Required;
 import play.mvc.Controller;
+import dao.DAO;
 
 public class Application extends Controller {
 	public static void index() {
@@ -18,6 +16,7 @@ public class Application extends Controller {
 		render();
 	}
 
+	@SuppressWarnings("static-access")
 	public static void signup(String email, String username) {
 		// Validate the two required fields.
 		if (email == null || email.isEmpty()
@@ -28,7 +27,7 @@ public class Application extends Controller {
 				|| validation.required(username).error != null)
 			validation.addError("username", "Please enter your HN username.");
 		else {
-			Author a = DAO.findAuthor(username);
+			Author a = DAO.findAuthorByUsername(username);
 
 			// If we know nothing about this user, check HN's site.
 			if (a == null && !HNParser.isValidUsername(username))
@@ -36,7 +35,7 @@ public class Application extends Controller {
 						+ "' does not appear to be a valid HN username.");
 		}
 
-		User u = DAO.findUser(username);
+		User u = DAO.findUserByUsername(username);
 
 		// Make sure they aren't already registered.
 		if (u != null)
@@ -45,11 +44,11 @@ public class Application extends Controller {
 
 		// If there were any errors, re-render the page with them.
 		if (validation.hasErrors()) {
-			if(email == null || email.isEmpty())
+			if (email == null || email.isEmpty())
 				email = FORM_DEFAULT_EMAIL;
-			if(username == null || username.isEmpty())
+			if (username == null || username.isEmpty())
 				username = FORM_DEFAULT_USERNAME;
-			
+
 			renderArgs.put("email", email);
 			renderArgs.put("username", username);
 
@@ -59,18 +58,18 @@ public class Application extends Controller {
 		// Register the user so we start looking for replies for them.
 		u = new User(username, email, System.currentTimeMillis());
 		DAO.saveUser(u);
-		
+
 		welcome();
 	}
-	
+
 	public static void welcome() {
 		render();
 	}
-	
+
 	public static void privacy() {
 		render();
 	}
-	
+
 	public static void how() {
 		render();
 	}
