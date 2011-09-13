@@ -3,7 +3,6 @@ package dao;
 import java.util.List;
 
 import models.Author;
-import models.Comment;
 
 public class ListAuthors {
 	public static void main(String[] args) {
