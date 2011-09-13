@@ -63,6 +63,11 @@ public class DAO {
 				false);
 	}
 
+	public static long getUserCount() {
+		DBCollection col = db.getCollection(USER_COL_NAME);
+		return col.count();
+	}
+
 	public static User findUserByUsername(String username) {
 		DBObject obj = find(USER_COL_NAME, "username", username);
 		return (obj == null ? null : new User(obj));
