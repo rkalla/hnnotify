@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /var/www/hnnotify.com
+cd /var/www
 play start hnnotify.com
