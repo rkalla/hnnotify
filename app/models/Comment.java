@@ -1,52 +1,10 @@
 package models;
 
-import java.io.Serializable;
-import java.util.Set;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
-import dao.DAO;
-
 public class Comment implements IModel {
-	public static void main(String[] args) {
-		// models.Comment@2985549 [state=NEW, id=2985549, username=richo,
-		// parentID=2985276, parentUsername=null, topicID=2985276,
-		// topicTitle=Twat. A cli ruby gem for Twitter,
-		// adoptionAttempts=0, deliveryAttempts=0, dateCreated=1315793283636,
-		// dateLastUpdated=1315793283636]
-		Comment c = new Comment();
-		c.id = 2985549;
-		c.username = "richo";
-		c.parentID = 2985276;
-		c.topicID = 2985276;
-		c.topicTitle = "Twat. A cli ruby gem for Twitter";
-		c.dateCreated = 1315793283636L;
-		c.dateLastUpdated = 1315793283636L;
-
-		DAO.saveComment(c);
-
-		// Comment c1 = new Comment();
-		// Comment c2 = new Comment();
-		//
-		// System.out.println(c1.hashCode());
-		// System.out.println(c2.hashCode());
-		// System.out.println(c1.equals(c2)); // false
-		//
-		// c1.id = 13;
-		// System.out.println(c1.hashCode()); // 13
-		// System.out.println(c1.equals(c2)); // false
-		//
-		// c2.id = 17;
-		// System.out.println(c1.hashCode()); // 13
-		// System.out.println(c2.hashCode()); // 17
-		// System.out.println(c1.equals(c2)); // false
-		//
-		// Set<Comment> set = DAO.findNewestComments(5);
-		//
-		// System.out.println(set.contains(c1));
-		// System.out.println(set.contains(c2));
-	}
+	private static final long serialVersionUID = 6687266653420606543L;
 
 	private static final String STATE_FIELD = "state";
 

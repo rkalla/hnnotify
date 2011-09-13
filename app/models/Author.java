@@ -1,17 +1,17 @@
 package models;
 
-import java.io.Serializable;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 public class Author implements IModel {
+	private static final long serialVersionUID = 8756025960792005423L;
+	
 	private static final String PARENT_ID_FIELD = "parentID";
 	private static final String USERNAME_FIELD = "username";
 
 	public Integer parentID;
 	public String username;
-	
+
 	public Author(Integer parentID, String username) {
 		this.parentID = parentID;
 		this.username = username;

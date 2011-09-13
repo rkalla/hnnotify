@@ -1,19 +1,11 @@
 package models;
 
-import java.io.Serializable;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
-/*
- * TODO: Add delivery-count to this user to keep track of how much we have delivered to them.
- * TODO: Add an enabled/disabled state
- * 
- * 
- * NOTE: Should Author and User be consolidated into a single element that we auto-create
- * then people fill in with email and we can activate with flag when they want?
- */
 public class User implements IModel {
+	private static final long serialVersionUID = -5794834367247667306L;
+
 	private static final String USERNAME_FIELD = "username";
 	private static final String EMAIL_FIELD = "email";
 	private static final String DATE_JOINED = "dateJoined";
