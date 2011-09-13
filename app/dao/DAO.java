@@ -68,6 +68,17 @@ public class DAO {
 		return col.count();
 	}
 
+	public static List<User> findAllUsers() {
+		List<User> userList = new ArrayList<User>();
+		DBCollection col = db.getCollection(USER_COL_NAME);
+		DBCursor cur = col.find();
+
+		while (cur.hasNext())
+			userList.add(new User(cur.next()));
+
+		return userList;
+	}
+
 	public static User findUserByUsername(String username) {
 		DBObject obj = find(USER_COL_NAME, "username", username);
 		return (obj == null ? null : new User(obj));
