@@ -1,23 +1,17 @@
 package jobs;
 
-import java.util.Date;
+import static common.Constants.MAX_DELIVERY_ATTEMPTS;
+
 import java.util.List;
 
-import notifiers.ReplyMailer;
-
-import models.Author;
 import models.Comment;
 import models.Comment.State;
 import models.User;
-
-import dao.DAO;
-
-import parser.HNParser;
+import notifiers.ReplyMailer;
 import play.Logger;
 import play.jobs.Every;
 import play.jobs.Job;
-
-import static common.Constants.*;
+import dao.DAO;
 
 /**
  * Class used to retrieve all comments with a state of {@link State#ADOPTED} and
@@ -26,7 +20,7 @@ import static common.Constants.*;
  * 
  * @author Riyad Kalla (software@thebuzzmedia.com)
  */
-//@Every("60s")
+@Every("60s")
 public class Mailer extends Job<Void> {
 	private static final String LOG_PREFIX = "[Mailer]";
 
@@ -51,7 +45,7 @@ public class Mailer extends Job<Void> {
 					LOG_PREFIX, (i + 1), size, c);
 
 			// Get the user on-file that wanted the notification.
-			User u = DAO.findUser(c.parentUsername);
+			User u = DAO.findUserByUsername(c.parentUsername);
 
 			// Handle two unexpected error scenarios without exploding.
 			if (u == null) {

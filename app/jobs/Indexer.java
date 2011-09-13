@@ -1,22 +1,20 @@
 package jobs;
 
+import static common.Constants.BASE_URL;
+import static common.Constants.NEW_COMMENTS_URL;
+
 import java.util.List;
 import java.util.Set;
 
-import org.jsoup.nodes.Document;
-
-import common.Constants;
-
-import dao.DAO;
-
 import models.Comment;
+
+import org.jsoup.nodes.Document;
 
 import parser.HNParser;
 import play.Logger;
 import play.jobs.Every;
 import play.jobs.Job;
-
-import static common.Constants.*;
+import dao.DAO;
 
 /**
  * Class used to index all the incoming new comments on HN.
@@ -27,7 +25,7 @@ import static common.Constants.*;
  * 
  * @author Riyad Kalla (software@thebuzzmedia.com)
  */
-//@Every("60s")
+@Every("60s")
 public class Indexer extends Job<Void> {
 	private static final String LOG_PREFIX = "[Indexer]";
 

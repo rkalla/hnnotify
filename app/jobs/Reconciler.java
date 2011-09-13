@@ -1,5 +1,7 @@
 package jobs;
 
+import static common.Constants.MAX_ADOPTION_ATTEMPTS;
+
 import java.util.Date;
 import java.util.List;
 
@@ -7,15 +9,11 @@ import models.Author;
 import models.Comment;
 import models.Comment.State;
 import models.User;
-
-import dao.DAO;
-
 import parser.HNParser;
 import play.Logger;
 import play.jobs.Every;
 import play.jobs.Job;
-
-import static common.Constants.*;
+import dao.DAO;
 
 /**
  * Class used to pull all comments out of the database with a state of
@@ -29,7 +27,7 @@ import static common.Constants.*;
  * 
  * @author Riyad Kalla (software@thebuzzmedia.com)
  */
-//@Every("30s")
+@Every("30s")
 public class Reconciler extends Job<Void> {
 	private static final String LOG_PREFIX = "[Reconciler]";
 
@@ -50,7 +48,7 @@ public class Reconciler extends Job<Void> {
 		for (int i = 0, size = commentList.size(); i < size; i++) {
 			Comment c = commentList.get(i);
 
-			Author author = DAO.findAuthor(c.parentID);
+			Author author = DAO.findAuthorByParentID(c.parentID);
 
 			/*
 			 * We first try and discover who wrote the parent comment by
@@ -114,7 +112,7 @@ public class Reconciler extends Job<Void> {
 				 * is useless to us (no one wants notifications of it) and we
 				 * can just skip it in the delivery step.
 				 */
-				User user = DAO.findUser(c.parentUsername);
+				User user = DAO.findUserByUsername(c.parentUsername);
 
 				/*
 				 * If there is no registered HNNotify user in the DB with this
