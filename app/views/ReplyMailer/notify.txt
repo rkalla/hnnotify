@@ -8,4 +8,4 @@ ${comment.text}
  
 ---------------------------------------------------------------------
 HN Notify (c) 2011 The Buzz Media
-Unsubscribe - http://hnnotify.com/unsubscribe?email=${user.email} 
+Unsubscribe - http://hnnotify.com/unsubscribe 

@@ -40,7 +40,7 @@ public class DAO {
 
 	public static void ensureIndices() {
 		DBCollection col = db.getCollection(USER_COL_NAME);
-		
+
 		col.ensureIndex(
 				new BasicDBObject().append("email", Integer.valueOf(1)), null,
 				false);
@@ -85,9 +85,32 @@ public class DAO {
 		return (obj == null ? null : new User(obj));
 	}
 
+	public static List<User> findUsersByUsername(String username) {
+		DBCollection col = db.getCollection(USER_COL_NAME);
+		DBCursor cur = col.find(new BasicDBObject()
+				.append("username", username));
+		List<User> userList = new ArrayList<User>(cur.count());
+
+		while (cur.hasNext())
+			userList.add(new User(cur.next()));
+
+		return userList;
+	}
+
 	public static User findUserByEmail(String email) {
 		DBObject obj = find(USER_COL_NAME, "email", email);
 		return (obj == null ? null : new User(obj));
+	}
+
+	public static List<User> findUsersByEmail(String email) {
+		DBCollection col = db.getCollection(USER_COL_NAME);
+		DBCursor cur = col.find(new BasicDBObject().append("email", email));
+		List<User> userList = new ArrayList<User>(cur.count());
+
+		while (cur.hasNext())
+			userList.add(new User(cur.next()));
+
+		return userList;
 	}
 
 	public static void saveUser(User u) {

@@ -44,23 +44,42 @@ public class Mailer extends Job<Void> {
 			Logger.info("%s Attempting to deliver comment [%d of %d]: %s",
 					LOG_PREFIX, (i + 1), size, c);
 
-			// Get the user on-file that wanted the notification.
-			User u = DAO.findUserByUsername(c.parentUsername);
+			/*
+			 * Get all the users on-file that want to be notified of replies to
+			 * this username.
+			 * 
+			 * More specifically, we let anyone watch anyone else's replies, so
+			 * username 'patio11' might have 10 people watching for replies to
+			 * his posts.
+			 */
+			List<User> userList = DAO.findUsersByUsername(c.parentUsername);
 
-			// Handle two unexpected error scenarios without exploding.
-			if (u == null) {
-				Logger.error(
-						"%s UNEXPECTED ERROR, when trying to load the User for username [%s], DB returned nothing to us. Reconciler may have adopted the comment to the wrong parent, comment: %s",
-						LOG_PREFIX, c.parentUsername, c);
-				continue;
-			} else if (u.email == null) {
-				Logger.error(
-						"%s UNEXPECTED ERROR, user [%s] had no email registered with them on file. This is likely a bug.",
-						LOG_PREFIX, u.username);
-				continue;
+			Logger.info(
+					"%s Found %d registered users wanting notifications for username [%s]",
+					LOG_PREFIX, userList.size(), c.parentUsername);
+
+			boolean mostlyDelivered = false;
+
+			// Attempt to deliver to all the interested people.
+			for (int j = 0, jSize = userList.size(); j < jSize; j++) {
+				User u = userList.get(j);
+
+				// Keep track that we at least delivered it once.
+				if (ReplyMailer.notify(u, c))
+					mostlyDelivered = true;
 			}
 
-			if (ReplyMailer.notify(u, c)) {
+			/*
+			 * We don't currently track comments in such a way that we can keep
+			 * track of m:n successful or failed deliveries, so instead we keep
+			 * track of a SINGLE successful delivery and consider the comment
+			 * delivered at that point.
+			 * 
+			 * If we couldn't even get ONE successful delivery though, then
+			 * there is something wrong like a network issue and we consider the
+			 * comment undelivered.
+			 */
+			if (mostlyDelivered) {
 				c.state = State.DELIVERED;
 				Logger.info("\t%s Delivery SUCCESSFUL!", LOG_PREFIX);
 			} else {
