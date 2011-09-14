@@ -5,7 +5,7 @@ import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 
 @OnApplicationStart
-public class DBVerifier extends Job<Void> {
+public class IndexVerifier extends Job<Void> {
 	@Override
 	public void doJob() throws Exception {
 		DAO.ensureIndices();
