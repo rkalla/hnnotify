@@ -40,6 +40,7 @@ public class DAO {
 
 	public static void ensureIndices() {
 		DBCollection col = db.getCollection(USER_COL_NAME);
+		
 		col.ensureIndex(
 				new BasicDBObject().append("email", Integer.valueOf(1)), null,
 				false);
