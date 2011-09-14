@@ -5,6 +5,7 @@ import static common.Constants.FORM_DEFAULT_EMAIL;
 import java.util.List;
 
 import models.User;
+import play.Logger;
 import play.mvc.Controller;
 import dao.DAO;
 
@@ -23,9 +24,9 @@ public class Unsubscribe extends Controller {
 			validation.addError("email", "Please enter a valid email address.");
 
 		/*
-		 * Because we allow people to register their email address multiple times
-		 * to watch comments on multiple people, we also need to allow them to unsub
-		 * in this way as well.
+		 * Because we allow people to register their email address multiple
+		 * times to watch comments on multiple people, we also need to allow
+		 * them to unsub in this way as well.
 		 */
 		List<User> userList = DAO.findUsersByEmail(email);
 
@@ -43,10 +44,16 @@ public class Unsubscribe extends Controller {
 
 			render("@index");
 		}
-		
+
+		Logger.info(
+				"Found %d user accounts registered with the email address [%s] that will be removed.",
+				userList.size(), email);
+
 		// Delete the registered accounts
-		for(User u : userList)
+		for (User u : userList) {
+			Logger.info("\tRemoving user: %s", u);
 			DAO.deleteUser(u);
+		}
 
 		farewell();
 	}
