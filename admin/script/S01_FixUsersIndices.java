@@ -10,7 +10,7 @@ import dao.DAO;
  * Script used to remove the unique indices on user accounts and allow
  * duplicates.
  */
-public class S01_NonUniqueDBIndices {
+public class S01_FixUsersIndices {
 	public static void main(String[] args) {
 		Mongo m;
 		DB db;
