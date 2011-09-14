@@ -42,10 +42,10 @@ public class DAO {
 		DBCollection col = db.getCollection(USER_COL_NAME);
 		col.ensureIndex(
 				new BasicDBObject().append("email", Integer.valueOf(1)), null,
-				true);
+				false);
 		col.ensureIndex(
 				new BasicDBObject().append("username", Integer.valueOf(1)),
-				null, true);
+				null, false);
 
 		col = db.getCollection(AUTHOR_COL_NAME);
 		col.ensureIndex(
