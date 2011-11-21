@@ -32,7 +32,7 @@ public class Indexer extends Job<Void> {
 	@Override
 	public void doJob() throws Exception {
 		long time = System.currentTimeMillis();
-		Logger.info("%s Job Starting at %d...", LOG_PREFIX, time);
+		Logger.info("%s Job Starting at %tc...", LOG_PREFIX, time);
 
 		/*
 		 * Load (up to) the last 5 most recent indexed comments so we have

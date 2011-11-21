@@ -34,7 +34,7 @@ public class Reconciler extends Job<Void> {
 	@Override
 	public void doJob() throws Exception {
 		long time = System.currentTimeMillis();
-		Logger.info("%s Job Starting at %d...", LOG_PREFIX, time);
+		Logger.info("%s Job Starting at %tc...", LOG_PREFIX, time);
 		List<Comment> commentList = DAO.findCommentsByState(State.NEW);
 
 		if (commentList.isEmpty())
