@@ -233,6 +233,14 @@ public class DAO {
 		update(COMMENT_COL_NAME, "id", c.id, c);
 	}
 
+	public static void deleteCommentByState(State state) {
+		if (state == null)
+			return;
+
+		DBCollection col = db.getCollection(COMMENT_COL_NAME);
+		col.remove(new BasicDBObject().append("state", state.name()));
+	}
+
 	private static <T> DBObject find(String colName, String idFieldName, T id) {
 		DBCollection col = db.getCollection(colName);
 		return col.findOne(new BasicDBObject().append(idFieldName, id));
