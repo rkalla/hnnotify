@@ -1,8 +1,6 @@
 package notifiers;
 
-import static common.Constants.*;
-
-import models.Comment;
+import static common.Constants.EMAIL_PREFIX;
 import play.mvc.Mailer;
 
 public class StatsMailer extends Mailer {

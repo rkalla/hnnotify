@@ -1,14 +1,15 @@
 package parser;
 
-import static common.Constants.*;
+import static common.Constants.CONNECTION_TIMEOUT;
+import static common.Constants.ITEM_URL;
+import static common.Constants.MAX_RETRIES;
+import static common.Constants.RETRY_DELAY;
+import static common.Constants.USER_URL;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import models.Comment;
 
