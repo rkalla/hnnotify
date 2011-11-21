@@ -61,10 +61,19 @@ public class Reconciler extends Job<Void> {
 				Logger.info("\t%s Cache HIT, parent username found in DB.",
 						LOG_PREFIX);
 			} else {
-				c.parentUsername = HNParser.parseCommentUsername(c.parentID);
 				Logger.info(
 						"\t%s Cache MISS, parsing parent username from HN directly.",
 						LOG_PREFIX);
+
+				c.parentUsername = HNParser.parseCommentUsername(c.parentID);
+
+				if (c.parentUsername == null)
+					Logger.error(
+							"\t\t%s HN Parent Username parse FAILED! HN could be blocking or screen-scraping failed to identify parent.",
+							LOG_PREFIX);
+				else
+					Logger.info("\t\t%s HN Parent Username parsed SUCCESS: %s",
+							LOG_PREFIX, c.parentUsername);
 			}
 
 			/*
