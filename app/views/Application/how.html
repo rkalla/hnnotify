@@ -5,7 +5,65 @@
 	<h3>How HN Notify Works</h3>
 	<hr/>
 	<p>
-		Coming soon...
+		HN Notify is written using:
+		<ul>
+			<li><a href="http://jsoup.org/">JSoup</a></li>
+			<li><a href="http://www.playframework.org/">Play! Framework</a></li>
+			<li><a href="http://www.mongodb.org/">MongoDB</a></li>
+		<ul>
+	</p>
+	<p>
+		The guts of HNN are a collection of asynchronous 
+		<a href="http://www.playframework.org/documentation/1.2.3/jobs">jobs</a>
+		that run every few minutes to index new comments, reconcile comment 
+		hierarchies and deliver reply notifications (if needed).
+	</p>
+	<p>
+		An index job reads new comments from the Hacker News comment stream and
+		records them in the database as NEW. A reconciler job follows up on all
+		the NEW comments, attempting to figure out the parent they were posted
+		to (either another comment or a story submission). Lastly, a delivery 
+		job takes all properly-parented comments and sends out an email 
+		notification to members of HN Notify if necessary; otherwise the comment
+		is trashed.
+	</p>
+	<h3>History</h3>
+	<p>
+		The original proof-of-concept implementation of HN Notify was written
+		using a single job and <a href="http://redis.io/">Redis</a> as a backing
+		store.
+	</p>
+	<p>
+		Redis's light weight and raw speed was perfect for a service like this,
+		but I found it hard to mentally map my data models and flow to the flat
+		data structures in Redis (without resorting to simply storing JSON 
+		docs as K/V pairs which would then push JSON-parsing code into my job
+		logic).
+	</p>
+	<p>
+		I opted for MongoDB as the query model matched perfectly for what I 
+		needed. Just to be clear, Redis would have worked wonderfully here had
+		I spent more time with the data model and possibly abstracting out the
+		issues I was having with the mental-map in Java instead of hoping over
+		to Mongo; there is no technological shortcoming in Redis that encouraged
+		me to switch.
+	</p>
+	<p>
+		Another challenge was trying to accomplish indexing, reconciling and
+		delivery all in the same execution thread; the original class ended up
+		being hellaciously long with pages worth of error checking/handling code
+		scattered throughout. The job would frequently fail due to network
+		hickups or HN temporarily blocking the service causing the entire chain
+		of execution to fail.
+	</p>
+	<p>
+		An obvious problem for anyone trying to write a scalable system, but for
+		someone hacking on a weekend project I didn't think it was a problem until
+		I actually had it running (and failing left and right).
+	</p>
+	<p>
+		Moving to the asynchronous and disparate job model was <strong>immediately</strong> 
+		a better design as soon as I had it deployed and running without issue.
 	</p>
 	<p>
 		If you have any questions or feedback, you can reach me at 
